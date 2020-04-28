@@ -1,68 +1,62 @@
-/* CSS Document */
-@font-face {
-	font-family: "Console";
-	src: url("fonts/CPmono.ttf") format("truetype");
-  }
-  
-  /*@font-face {
-	  font-family: "Con sole";
-	  src: url("fonts/CPmono.eot") format("opentype");
-  }*/
-  
-  /*
-	  # is id, . is class
-  */
-  
-  body {
-	color: white;
-	background-color: black;
-  }
-  
-  #container {
+/* CSS Document # is id, . is class*/
+
+body {
+color: white;
+background-color: black;
+}
+
+.text {
 	color: green;
-	position: absolute;
-	left: 40%;
-	margin-top: -300px;
-	margin-left: -300px;
-	margin-right: 300px;
-  }
-  
-  #console {
-	background-color: black;
-	height: 400px;
-	width: 800px;
-	margin: 0 auto;
-	overflow: auto;
-	color: white;
-	font-size: 17px;
-	font-family: "Times New Roman", Times, serif;
-  }
-  
-  .command_line {
-	background-color: black;
-	color: green;
-	border: 1px solid #333;
-	font-family: "Times New Roman", Times, serif;
-	font-size: 17px;
-  }
-  
-  .command_line:focus {
-	outline: none;
-  }
-  
-  .command_button {
-	background-color: rgb(10, 10, 10);
-	color: green;
-	border-color: green;
-  
-  }
-  
-  .command_button:hover {
-	background-color: rgb(50, 50, 50);
-	color: green;
-  }
-  
-  .hidden {
-	display: none;
-  }
-  
+}
+
+#container {
+/*color: green;*/
+position: absolute;
+left: 40%;
+margin-top: -300px;
+margin-left: -300px;
+margin-right: 300px;
+}
+
+#console {
+background-color: black;
+height: 400px;
+width: 800px;
+margin: 0 auto;
+overflow: auto;
+color: white;
+font-size: 17px;
+font-family: "Times New Roman", Times, serif;
+}
+
+.command_line {
+background-color: black;
+color: green;
+border: 1px solid #333;
+font-family: "Times New Roman", Times, serif;
+font-size: 17px;
+}
+
+.command_line:focus {
+outline: none;
+}
+
+.command_button {
+background-color: rgb(10, 10, 10);
+color: green;
+border-color: green;
+
+}
+
+.command_button:hover {
+background-color: rgb(50, 50, 50);
+color: green;
+}
+
+.hidden {
+display: none;
+}
+
+.center {
+text-align: center;
+}

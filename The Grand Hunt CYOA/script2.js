@@ -33,14 +33,16 @@ var land = ""; // Where are you on the planet.
 
 // Origins
 originmode = false;
-var PN = ""; // player name.
+var pn = ""; // player name.
+//console.log("The player name is save as " + pn);
 var gender = ""; // just change what people call you, no impact on story.
 // blankobg = false; // blank easy mode, you have no weakness but no strength.
 // bountyhunterobg = false; // you pay money for your faction, you have strength of prestart equipment and companions. but weakness of have to support them with credits.
 // mercenaryobg = false; // You get stuff for your employer, you have strength of prestart base paid by your boss. but weakness of have to get stuff for your boss.
 
 var OBG = ""; // Decide your origin backgrounds
-
+var playerName = false;
+var genderC = false;
 //
 
 //
@@ -53,14 +55,16 @@ var OBG = ""; // Decide your origin backgrounds
 
 // All functions
 
-	// Variables Section
-
-  input = $(".command_line").val();
+  /*// Variables Section
+  
+  var input = $(".command_line").val();
+  input = "";
   //input = "";
-	console.log("The Input is " + input);
-  /*
-	pn = "" + input + "";
-	console.log("The pn is " + pn);
+  console.log("The Input is " + input);
+  var pn
+  pn = "" + input + "";
+  console.log("The pn is " + pn);
+  console.log("The PN is " + PN);
 
 	// $(this) is somehow allow it to recieve array and input them into variable buttons for uses in multiple choice buttons. it work using what is current, if you click on button that button become this, if you click on block of text, that text become this, might be useful.
 
@@ -68,8 +72,8 @@ var OBG = ""; // Decide your origin backgrounds
 
 	// Input Section
 
-	// $("<center><button class='command_button' size='50' value=''></button></center><br>").insertBefore("#placeholder_choice");
-	// $("<center><input type='text' class='command_line' size='50' autofocus='autofocus' autocomplete='off'></center><br>");
+	// $("<center><button class='command_button nay button' value='Yes'>Yes</button></center><br class='br'>").insertBefore("#placeholder_choice");
+	// $("<input type='text' class='command_line line' size='50' autofocus='autofocus' autocomplete='off'></input>").insertBefore("#placeholder").fadeIn(0);
 	// $("command_line").fadeIn(0000);
 
 	var button = $(this).val();
@@ -168,144 +172,204 @@ function startGame() {
 
       console.log("You click on " + button);
 
-      if (OBG != "") {
+      if (playerName == true && originmode == true) {
 
-        switch (OBG) {
+        input = $(".command_line").val();
+        console.log("The Input is " + input);
+
+        pn = "" + input + "";
+        console.log("The pn is " + pn);
+
+        if (pn != "") { // =! is turning string into boolean for some reasons. It because you have it as =! and not != which is a = !b instead of a not equal b.
+
+          clear();
+
+          //gender();
+
+          playerName = false;
+          console.log("playerName is " + playerName);
+          genderC = true;
+          console.log("genderC is " + genderC);
+          
+          /*$("<p class = 'text'>Is your name, " + pn + "?</p>").insertBefore("#placeholder");
+    
+          $("<center><button class='command_button nay button' value='Yes'>Yes, This is my name.</button></center><br class='br'>").insertBefore("#placeholder_choice");
+    
+          $("<center><button class='command_button nay button' value='No'>No, let me pick other name.</button><center>").insertBefore("#placeholder_choice");*/
+    
+        } else if (pn == "") {
+    
+          //OBG = "";
+    
+          clear();
+
+          Intro();
+    
+          $("<p class='text'>Sorry, but you need to give yourself a name</p>").insertBefore("#placeholder");
+    
+        } else {
+          alert("Something went wrong with giving yourself a name! Is it " + pn);
+        }
+
+      }
+
+      else if (genderC == true && originmode == true) {
+
+        alert("It just a social construct!");
+
+      	$("<p>Good, now for the next step that have no value for your story beside your pronoun, but " + pn + ", are you a boy or a girl.</p>").insertBefore("#placeholder");
+
+      	$("<center><button class='command_button fe\male' value='Man'>I am a man!</button></center><br class='br'>").insertBefore("#placeholder_choice");
+
+        $("<center><button class='command_button fe\male' value='Woman'>I am a woman!</button></center>").insertBefore("#placeholder_choice");
+        
+        gnederC = false;
+
+      }
+
+      else if (OBG != "") {
+
+        /*switch (OBG) {
 
           case "Blank":
 
-            var pn
-            pn = "" + input + "";
-            console.log("The pn is " + pn);
-
             //alert("It working motherfucker!");
 
-            if (pn == "") {
+              pn = "" + input + "";
+              console.log("The pn is " + pn);
 
-              $(".text").remove();
+              if (input == "") {
 
-              $(".button").remove();
-
-              $(".line").remove();
-
-              $(".br").remove();
-
-              //$(".pn").remove();
-
-              $("<p class='pn text'>What is your name?</p>").insertBefore("#placeholder");
-
-              $("<input type='text' class='command_line line' size='50' autofocus='autofocus' autocomplete='off'></input>").insertBefore("#placeholder").fadeIn(0);
-
-              $("<center><button class='command_button nay button' value='Yes'>Yes</button></center><br class='br'>").insertBefore("#placeholder_choice");
-
-              $("<center><button class='command_button nay button' value='No'>No</button><center>").insertBefore("#placeholder_choice");
-
-            }
-
-            else if (pn == "Input") {
-
-              bopn();
-
-            }
-
-            else {
-              alert("Something went wrong with your Blank OBG nay!");
-            }
+                clear();
+  
+                $("<p class='text'>What is your name?</p>").insertBefore("#placeholder");
+  
+                $("<input type='text' class='command_line line' size='50' autofocus='autofocus' autocomplete='off'></input>").insertBefore("#placeholder").fadeIn(0);
+  
+                $("<center><button class='command_button nay button' value='Yes'>Yes</button></center><br class='br'>").insertBefore("#placeholder_choice");
+  
+                $("<center><button class='command_button nay button' value='No'>No</button><center>").insertBefore("#placeholder_choice");
+  
+              }
+  
+              else if (input != "") {
+  
+                bopn();
+  
+              }
+  
+              else {
+                alert("Something went wrong with your Blank OBG nay!");
+              }
 
             break;
 
           case "Bounty Hunter":
 
+            input = $(".command_line").val();
+            console.log("The Input is " + input);
+
+            //alert("It working motherfucker!");
+
             if (pn == "") {
 
-              $(".text").remove();
+              pn = "" + input + "";
+              console.log("The pn is " + pn);
 
-              $(".button").remove();
+              if (input == "") {
 
-              $(".line").remove();
-
-              $(".br").remove();
-
-              //$(".pn").remove();
-
-              $("<p class='pn text'>What is your name?</p>").insertBefore("#placeholder");
-
-              $("<input type='text' class='command_line line' size='50' autofocus='autofocus' autocomplete='off'></input>").insertBefore("#placeholder").fadeIn(0);
-
-              $("<center><button class='command_button nay button' value='Yes'>Yes</button></center><br class='br'>").insertBefore("#placeholder_choice");
-
-              $("<center><button class='command_button nay button' value='No'>No</button><center>").insertBefore("#placeholder_choice");
+                clear();
+  
+                $("<p class='text'>What is your name?</p>").insertBefore("#placeholder");
+  
+                $("<input type='text' class='command_line line' size='50' autofocus='autofocus' autocomplete='off'></input>").insertBefore("#placeholder").fadeIn(0);
+  
+                $("<center><button class='command_button nay button' value='Yes'>Yes</button></center><br class='br'>").insertBefore("#placeholder_choice");
+  
+                $("<center><button class='command_button nay button' value='No'>No</button><center>").insertBefore("#placeholder_choice");
+  
+              }
+  
+              else if (input != "") {
+  
+                bhopn();
+  
+              }
+  
+              else {
+                alert("Something went wrong with your Bounty Hunter OBG nay!");
+              }
 
             }
 
-            else if (pn == "Input") {
+            else if (pn != "") {
 
-              bhopn();
-
-            }
-
-            else {
-              alert("Something went wrong with your Bounty Hunter OBG nay!");
-            }
+            };
 
             break;
 
           case "Mercenary":
 
+            input = $(".command_line").val();
+            console.log("The Input is " + input);
+
+            //alert("It working motherfucker!");
+
             if (pn == "") {
 
-              $(".text").remove();
+              pn = "" + input + "";
+              console.log("The pn is " + pn);
 
-              $(".button").remove();
+              if (input == "") {
 
-              $(".line").remove();
-
-              $(".br").remove();
-
-              //$(".pn").remove();
-
-              $("<p class='pn text'>What is your name?</p>").insertBefore("#placeholder");
-
-              $("<input type='text' class='command_line line' size='50' autofocus='autofocus' autocomplete='off'></input>").insertBefore("#placeholder").fadeIn(0);
-
-              $("<center><button class='command_button nay button' value='Yes'>Yes</button></center><br class='br'>").insertBefore("#placeholder_choice");
-
-              $("<center><button class='command_button nay button' value='No'>No</button><center>").insertBefore("#placeholder_choice");
+                clear();
+  
+                $("<p class='text'>What is your name?</p>").insertBefore("#placeholder");
+  
+                $("<input type='text' class='command_line line' size='50' autofocus='autofocus' autocomplete='off'></input>").insertBefore("#placeholder").fadeIn(0);
+  
+                $("<center><button class='command_button nay button' value='Yes'>Yes</button></center><br class='br'>").insertBefore("#placeholder_choice");
+  
+                $("<center><button class='command_button nay button' value='No'>No</button><center>").insertBefore("#placeholder_choice");
+  
+              }
+  
+              else if (input != "") {
+  
+                mopn();
+  
+              }
+  
+              else {
+                alert("Something went wrong with your Mercenary OBG nay!");
+              }
 
             }
 
-            else if (pn == "Input") {
+            else if (pn != "") {
 
-              mopn();
-
-            }
-
-            else {
-              alert("Something went wrong with your Mercenary OBG nay!");
-            }
+            };
 
             break;
 
           default:
             text = "Something went wrong with cases for OBG!";
 
-        }
+        }*/
 
       }
-
-      /*if (gender == "" && originmode == true) {
-
-      	$("<p>Good, now for the next step that have no value for your story beside your pronoun, but " + pn + ", are you a boy or a girl.</p>").insertBefore("#placeholder")
-
-      	$("<center><button class='command_button fe/male' value='Man'>I am a man!</button></center><br class='br'>").insertBefore("#placeholder_choice");
-
-      	$("<center><button class='command_button fe/male' value='Woman'>I am a woman!</button></center>").insertBefore("#placeholder_choice");
-
-      }*/
 
     } else if (button == "No") {
 
       console.log("You click on " + button)
+
+      if (playerName == true) {
+
+        clear();
+
+        Intro();
+
+      };
 
       if (OBG != "") {
 
@@ -315,9 +379,7 @@ function startGame() {
 
             OBG = "";
 
-            $(".text").remove();
-
-            $(".button").remove();
+            clear();
 
             Intro();
 
@@ -327,9 +389,7 @@ function startGame() {
 
             OBG = "";
 
-            $(".text").remove();
-
-            $(".button").remove();
+            clear();
 
             Intro();
 
@@ -339,9 +399,7 @@ function startGame() {
 
             OBG = "";
 
-            $(".text").remove();
-
-            $(".button").remove();
+            clear();
 
             Intro();
 
@@ -378,6 +436,48 @@ function startGame() {
 
   });
 
+  $(document).on("click", "fe\male", function() {
+
+    if (gender == "" && originmode == true) {
+
+      var button = $(this).val();
+      console.log("The Button is " + button);
+      $("#console").scrollTop($("#console")[0].scrollHeight);
+
+      $("<p class = text>So you are a " + gender + ", correct?</p>").insertBefore("#placeholder");
+
+      $("<center><button class='command_button nay button' value='Yes'>Yes, I am " + gender + ".</button></center><br class='br'>").insertBefore("#placeholder_choice");
+    
+      $("<center><button class='command_button nay button' value='No'>No, this is a mistake!</button><center>").insertBefore("#placeholder_choice");
+
+      /*if (button == "Male") {
+
+        gender = "Male";
+
+        $("<p class = text>So you are a man, correct?</p>").insertBefore("#placeholder");
+
+        $("<center><button class='command_button nay button' value='Yes'>Yes, This is my name.</button></center><br class='br'>").insertBefore("#placeholder_choice");
+    
+        $("<center><button class='command_button nay button' value='No'>No, let me pick other name.</button><center>").insertBefore("#placeholder_choice");
+
+      }
+
+      else if (button == "Female") {
+
+        gender = "Female";
+
+        $("<p class = text>So you are a woman, correct?</p>").insertBefore("#placeholder");
+
+        $("<center><button class='command_button nay button' value='Yes'>Yes, This is my name.</button></center><br class='br'>").insertBefore("#placeholder_choice");
+    
+        $("<center><button class='command_button nay button' value='No'>No, let me pick other name.</button><center>").insertBefore("#placeholder_choice");
+
+      }*/
+
+    }
+
+  });
+
   var button = $(this).val();
   console.log("The Button is " + button);
   $("#console").scrollTop($("#console")[0].scrollHeight);
@@ -385,13 +485,23 @@ function startGame() {
   // Function set for Intro
   function Intro() {
 
-    $(".line").remove();
+    clear();
 
-    $(".br").remove();
+    $("<p class = 'text'>You woke up as the alarm ringing at your ears. Groaning, you got up and look outside the viewport of your room. You see a massive space station. ''Hello, welcome to the Star Nexus, that are orbiting the planet by the name of " + planetnamebold + ".'' The speaker on the starship I was on call out. I decide to come to this planet because it was recently discovered to have a carcass of the Illuminated Horror within the planet core. This give the planet properities of magic, which make it valuable for the bounty hunting for the elites. It a good place to go to for the hunting. I walk to the dock bay, a lady hail me and ask me for my name and to state my business here. </p>").insertBefore("#placeholder").fadeIn(0, function() {
+      originmode = true;
+      console.log("originmode is " + originmode);
+      playerName = true;
+      console.log("playerName is " + playerName);
 
-    //$(".pn").remove();
+    });
 
-    $("<div class= 'text'>" + "<p>You woke up as alarm ranging at your ears. Groaning, you got up and look outside the viewport of your room. You look at a massive space station. Hello, welcome to the Star Nexus, that are orbiting the planet by the name of " + planetnamebold + ".</p> <p>Ahh, yes. I decide to come to this planet because it was recently discovered to have carcass of Illuminated Horror within the planet core. This give the planet the properities of magic, which make it valuable for bounty hunting for the elites. It a good place to go to for ___</p> <p>Please state your Origins for this game. Here your options. </p>" + "</div>").insertBefore("#placeholder").fadeIn(5000, function() {
+    $("<p class='text'>What is your name?</p>").insertBefore("#placeholder");
+  
+    $("<input type='text' class='command_line line' size='10' autofocus='autofocus' autocomplete='off'></input>").insertBefore("#placeholder").fadeIn(0);
+
+    $("<center><button class='command_button nay button' value='Yes'>ID Confirmed</button></center><br class='br'>").insertBefore("#placeholder_choice");
+
+    /*$("<p class = 'text'>You woke up as alarm ranging at your ears. Groaning, you got up and look outside the viewport of your room. You look at a massive space station. Hello, welcome to the Star Nexus, that are orbiting the planet by the name of " + planetnamebold + ".</p> <p class = 'text'>Ahh, yes. I decide to come to this planet because it was recently discovered to have carcass of Illuminated Horror within the planet core. This give the planet the properities of magic, which make it valuable for bounty hunting for the elites. It a good place to go to for ___</p> <p>Please state your Origins for this game. Here your options. </p>").insertBefore("#placeholder").fadeIn(5000, function() {
       originmode = true;
       console.log("originmode is " + originmode);
     });
@@ -406,7 +516,7 @@ function startGame() {
 
     // Mercenary Origin
     $("<center><button id='mercenaryStart' class='command_button button' size='50' value='Mercenary'>Origin: My employer want me here.</button></center><br class='br'>").insertBefore("#placeholder_choice");
-    //
+    //*/
 
   }
   // End Function for Intro
@@ -420,9 +530,7 @@ function startGame() {
 
       OBG = "Blank";
 
-      $(".text").remove();
-
-      $(".button").remove();
+      clear();
 
       $("<p class= 'text'>I don't really remember why I am here, but I can tell that this is my chance for new life. You may not have any advantages at this life but it is your life now without anyone telling you what to do or responible, but it mean you have duty for yourself, so be careful when making promises. Is this what you want?</p>").insertBefore("#placeholder"); // blank origin 2 (Testing)
 
@@ -434,7 +542,7 @@ function startGame() {
 
       /*$(".command_line").insertBefore("#placeholder").fadeIn(0);
 
-      $("<center><button class='command_button pn' size='50' value='Playername'>My name is...</button></center>").insertBefore("#placeholder_choice");*/
+      $("<center><button class='command_button' size='50' value='Playername'>My name is...</button></center>").insertBefore("#placeholder_choice");*/
 
     } else $("<p>Sorry, but you can't change your origin, now that have been set.</p>").insertBefore("#placeholder");
   }
@@ -447,9 +555,7 @@ function startGame() {
 
       OBG = "Bounty Hunter";
 
-      $(".button").remove();
-      
-      $(".text").remove();
+      clear();
 
       $("<p class= 'text'>I came here with my gang to get rich!</p>").insertBefore("#placeholder");
 
@@ -459,7 +565,7 @@ function startGame() {
 
       //$(".command_line").insertBefore("#placeholder").fadeIn(0);
 
-      //$("<center><button class='command_button pn' size='50' value='Playername'>My name is...</button></center><br class='br'>").insertBefore("#placeholder_choice");
+      //$("<center><button class='command_button' size='50' value='Playername'>My name is...</button></center><br class='br'>").insertBefore("#placeholder_choice");
 
     } else $("<p>Sorry, but you can't change your origin, now that have been set.</p>").insertBefore("#placeholder");
   }
@@ -472,9 +578,7 @@ function startGame() {
 
       OBG = "Mercenary";
 
-      $(".text").remove();
-
-      $(".button").remove();
+      clear();
 
       $("<p class= 'text'>My boss want me to stay here and find something fancy and valuable and deliver it to him.</p>").insertBefore("#placeholder");
 
@@ -484,147 +588,25 @@ function startGame() {
 
       //$(".command_line").insertBefore("#placeholder").fadeIn(0);
 
-      //$("<center><button class='command_button pn' size='50' value='Playername'>My name is...</button></center><br class='br'>").insertBefore("#placeholder_choice");
+      //$("<center><button class='command_button' size='50' value='Playername'>My name is...</button></center><br class='br'>").insertBefore("#placeholder_choice");
 
     } else $("<p>Sorry, but you can't change your origin, now that have been set.</p>").insertBefore("#placeholder");
   }
   // End of Function Mercenary Origin
 
-  // blank origin player name
-  function bopn() {
+  function clear () {
 
-    // Mechanic Variables
-    var input = $(".command_line").val();
-    console.log("The Input is " + input);
+    $(".text").remove();
 
-    pn = "" + input + "";
-    console.log("The pn is " + pn);
-    //
+    $(".button").remove();
 
-    if (pn != "") { // =! is turning string into boolean for some reasons. It because yo have it as =! and not != which is a = !b instead of a not equal b.
+    $(".line").remove();
 
-      $("<p>So your name is " + pn + "?</p>").insertBefore("#placeholder");
+    $(".br").remove();
 
-      $(".line").remove();
-
-      //$(".pn").remove();
-
-      $(".text").remove();
-
-      $("<center><button class='command_button nay button' value='Yes'>Yes</button></center><br class='br'>").insertBefore("#placeholder_choice");
-
-      $("<center><button class='command_button nay button' value='No'>No</button><center>").insertBefore("#placeholder_choice");
-
-    } else if (pn == "") {
-
-      OBG = "";
-
-      $(".text").remove();
-
-      //$(".pn").remove();
-
-      Blank();
-
-      $(".b.text").remove();
-
-      $("<p class='text'>Sorry, but you need to give yourself a name</p>").insertBefore("#placeholder");
-
-      $(".command_line").insertBefore("#placeholder").fadeIn(0);
-
-    } else {
-      alert("Something went wrong with giving yourself a name! Is it " + pn);
-    }
-
-  }
-  // End of blank origin player name
-
-  /* bounty hunter origin player name */
-  function bhopn() {
-
-    if (pn != "" && button == "Playername") { // =! is turning string into boolean for some reasons. It because yo have it as =! and not != which is a = !b instead of a not equal b.
-
-      $("<p>So your name is " + pn + "?</p>").insertBefore("#placeholder");
-
-      $(".command_line").remove();
-
-      $(".pn").remove();
-
-      $(".bho1").remove();
-
-      $(".bhipn").remove();
-
-      $("<center><button class='command_button nay' value='Yes'>Yes</button></center><br class='br'>").insertBefore("#placeholder_choice");
-
-      $("<center><button class='command_button nay' value='No'>No</button><center>").insertBefore("#placeholder_choice");
-
-    } else if (pn == "" && button == "Playername") {
-
-      OBG = "";
-
-      $(".bho1").remove();
-
-      $(".pn").remove();
-
-      BountyHunter();
-
-      $(".bhipn").remove();
-
-      $("<p class='bhipn'>Sorry, but you need to give yourself a name</p>").insertBefore("#placeholder");
-
-      $(".command_line").insertBefore("#placeholder").fadeIn(0);
-
-    } else {
-      alert("Something went wrong with giving yourself a name! Is it " + pn);
-    }
-
-  }
-  // End of bounty hunter origin player name
-
-  /* mercenary origin player name */
-  function mopn() {
-
-    if (pn != "" && button == "Playername") { // =! is turning string into boolean for some reasons. It because yo have it as =! and not != which is a = !b instead of a not equal b.
-
-      $("<p>So your name is " + pn + "?</p>").insertBefore("#placeholder");
-
-      $(".command_line").remove();
-
-      $(".pn").remove();
-
-      $(".mo1").remove();
-
-      $(".mipn").remove();
-
-      $("<center><button class='command_button nay' value='Yes'>Yes</button></center><br class='br'>").insertBefore("#placeholder_choice");
-
-      $("<center><button class='command_button nay' value='No'>No</button><center>").insertBefore("#placeholder_choice");
-
-    } else if (pn == "" && button == "Playername") {
-
-      OBG = "";
-
-      $(".mo1").remove();
-
-      $(".pn").remove();
-
-      Mercenary();
-
-      $(".mipn").remove();
-
-      $("<p class='mipn'>Sorry, but you need to give yourself a name</p>").insertBefore("#placeholder");
-
-      $(".command_line").insertBefore("#placeholder").fadeIn(0);
-
-    } else {
-      alert("Something went wrong with giving yourself a name! Is it " + pn);
-    }
-
-  }
-  // End of mercenary origin player name
+  };
 
   $(".command_line").val("");
-
-  console.clear();
 
 };
 // End of Start Game
