@@ -1,0 +1,17 @@
+// Use this as script 3 is raw button scenario and script 3 is raw input scenario, this script is playground for hybrid
+
+// JavaScript Document
+
+// # is id, . is class
+
+// Remember to use those startgame() function and nesting those inside it and then make function for every choice to greatly simplified those and give it ability to go back and start game.
+
+// Look at your Text Text 1 Script for clues to this solution.
+
+// You will need to make unique tag for your choices as it seem that you cant see the My name is... choice because of FadeOut button tag inside Blank Origin... Look like it time for function.
+
+// show() and hide() could be useful as HUD pop up for information on characters, events, places, etc. it basically allow size to grow and shrink instead of fade out and in.
+
+// Use .remove() to actually get rid of element instead of hide() or fadeOut(), etc.
+
+// Don't forget to add class and then remove it for <br> to prevent that blank line add on each time you repeat a choice cycle.
