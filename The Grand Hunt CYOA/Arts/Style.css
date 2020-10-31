@@ -1,0 +1,298 @@
+/* CSS Document # is id, . is class*/
+
+* {
+box-sizing: border-box;
+overflow: auto;
+text-align: center;
+}
+
+html {
+overflow: hidden;
+}
+
+body {
+color: white;
+background-color: black;
+}
+
+canvas {
+position: absolute;
+width: 200px;
+left: 1068px;
+height: 205px;
+top:800px; /*50px*/
+padding: 5px;
+border-bottom: 1px solid darkgreen;
+}
+
+.game {
+position: absolute;
+width: 200px;
+left: 1068px;
+height: 205px;
+top:50px;
+padding: 5px;
+border-bottom: 1px solid darkgreen;
+}
+
+.texts {
+color: green;
+}
+
+#container {
+position: absolute;
+color: green;
+border: 1px solid darkgreen;
+width: 862px;
+left: 207px;
+height: 820px;
+padding: 10px;
+top: 50px;
+}
+
+#textbox {
+position: absolute;
+color: green;
+border-bottom: 1px solid darkgreen;
+width: 862px;
+left: 207px;
+height: 650px;
+padding: 10px;
+top: 50px;
+}
+
+#movement {
+position: absolute;
+color: green;
+border-top: 1px solid darkgreen;
+border-left: 1px solid darkgreen;
+width: 212px;
+left: 856px;
+height: 170px;
+padding: 10px;
+top: 700px;
+}
+
+#choicebox {
+position: absolute;
+color: green;
+border-top: 1px solid darkgreen;
+border-right: 1px solid darkgreen;
+width: 650px;
+left: 207px;
+height: 170px;
+padding: 10px;
+top: 700px;
+}
+
+.command_line {
+background-color: black;
+color: green;
+border: 1px solid #333;
+font-family: "Times New Roman", Times, serif;
+font-size: 17px;
+}
+
+.command_line:focus {
+outline: none;
+}
+
+.command_button {
+background-color: rgb(10, 10, 10);
+color: green;
+border-color: green;
+margin-right: 1em;
+margin-bottom: 1em;
+padding: 5px;
+}
+
+.command_button:hover {
+background-color: rgb(50, 50, 50);
+color: green;
+}
+
+.compass_button {
+background-color: black;
+color: goldenrod;
+border-color: goldenrod;
+margin-right: 1em;
+margin-bottom: 1em;
+padding: 5px;
+}
+
+.compass_button:hover {
+background-color: gold;
+color: goldenrod;
+}
+
+#menu_bar {
+position: absolute;
+border-bottom: 10px solid darkgreen;
+padding-bottom: 10px;
+width:1260px;
+}
+
+.menu_button {
+background-color: rgb(10, 10, 10);
+color: green;
+border-color: green;
+
+}
+
+.menu_button:hover {
+background-color: rgb(50, 50, 50);
+color: green;
+}
+
+.hidden {
+display: none;
+}
+
+.center {
+text-align: center;
+}
+
+#player {
+position: absolute;
+color: green;
+text-align: left;
+border: 1px solid darkgreen;
+width: 200px;
+height: 820px;
+top:50px;
+padding: 10px;
+}
+
+#encounter {
+position: absolute;
+border: 1px solid darkgreen;
+width: 200px;
+left: 1068px;
+height: 820px;
+top:50px;
+padding: 10px;
+}
+
+.encounter{
+background-color: rgb(10, 10, 10);
+color: green;
+border-color: green;
+border: 0px;
+border-bottom: 1px solid darkgreen;
+width: 180px;
+margin: 0px;
+margin-bottom: 1em;
+padding: 5px;
+text-align: center;
+}
+
+/*#map { // Just a useless map option, use the #game in this place.
+position: absolute;
+border: 1px solid darkgreen;
+width: 200px;
+left: 1068px;
+height: 205px;
+top:50px;
+padding: 10px;
+}*/
+
+.map{
+background-color: rgb(10, 10, 10);
+color: green;
+border-color: green;
+border: 0px;
+border-bottom: 1px solid darkgreen;
+width: 180px;
+margin: 0px;
+margin-bottom: 1em;
+padding: 5px;
+text-align: center;
+}
+
+#inventory {
+position: absolute;
+color: green;
+border: 1px solid darkgreen;
+width: 431px;
+left: 638px;
+height: 651px;
+top: 50px;
+padding: 10px;
+}
+
+.inventory_button {
+background-color: rgb(10, 10, 10);
+color: green;
+border-color: green;
+margin-right: 1em;
+margin-bottom: 1em;
+padding: 5px;
+}
+
+.inventory_button:hover {
+background-color: rgb(50, 50, 50);
+color: green;
+}
+
+#equipment {
+position: absolute;
+color: green;
+border-bottom: 1px solid darkgreen;
+width: 431px;
+left: 207px;
+height: 650px;
+padding: 10px;
+top: 50px;
+}
+
+.equipment_button {
+background-color: rgb(10, 10, 10);
+color: green;
+border-color: green;
+margin-right: 1em;
+margin-bottom: 1em;
+padding: 5px;
+}
+
+.equipment_button:hover {
+background-color: rgb(50, 50, 50);
+color: green;
+}
+
+#storebox {
+position: absolute;
+color: green;
+width: 431px;
+left: 207px;
+height: 650px;
+padding: 10px;
+top: 50px;
+}
+
+/*#store {
+position: absolute;
+color: green;
+border-bottom: 1px solid darkgreen;
+width: 431px;
+left: 207px;
+height: 650px;
+padding: 10px;
+top: 50px;
+}*/
+
+.store_button {
+background-color: rgb(10, 10, 10);
+color: green;
+border-color: green;
+border: 0px;
+border-bottom: 1px solid darkgreen;
+width: 400px;
+margin-bottom: 1em;
+padding: 5px;
+text-align: center;
+}
+
+.store_button:hover {
+background-color: rgb(50, 50, 50);
+color: green;
+}

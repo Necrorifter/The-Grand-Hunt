@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./style.css" rel="stylesheet" type="text/css">
+    <script src="../../jQuery.js"></script>
+    <style>
+    /* CSS Document */
+@font-face {
+    font-family: "Console";
+    src: url("fonts/CPmono.ttf") format("truetype");
+}
+/*@font-face {
+    font-family: "Con sole";
+    src: url("fonts/CPmono.eot") format("opentype");
+}*/
+
+body {
+color: white;
+background-color: black;
+}
+
+#container {
+color: green;
+position: absolute;
+left: 40%;
+margin-top: -300px;
+margin-left: -300px;
+margin-right: 300px;
+}
+
+#console {
+background-color:black; 
+height: 400px; 
+width: 800px; 
+margin: 0 auto;
+overflow: auto;
+color: white;
+;
+font-size: 17px;
+font-family: "Times New Roman", Times, serif;
+}
+
+#command_line {
+display: none;
+}
+
+#command_button_core, .command_button {
+	background-color: rgb(10, 10, 10);
+	color: green;
+	border-color: green;
+	display:none;
+}
+
+#command_button_core:hover, .command_button:hover {
+	background-color: rgb(50, 50, 50);
+	color: green;
+}
+
+input {
+background-color: black;
+color: white;
+border: 1px solid #333;
+font-family: "Times New Roman", Times, serif;
+font-size: 17px;
+}
+
+input:focus {
+outline: none;
+}
+    </style>
+    <script>
+    //Use this as script 3 is raw button scenario and script 3 is raw input scenario, this script is playground for hybrid
+
+// JavaScript Document
+
+//SETS ALL VARIABLES FOR THE GAME
+
+	//Mechanic Variables
+	//
+
+	//locationexplored
+	currentland = "Star Nexus";
+	//
+
+	//inventory
+    Basicgear = true;
+    Advancedgear = false;
+	//
+
+	//Lores
+	planetname = "güzel dağ" // name of planet in turkish which mean beautiful mountain, given by Indiya.
+	planetnameskip = "<p>güzel dağ</p>" // same but with line break.
+	planetnamebold = "<b>güzel dağ</b>" // same but with bold.
+	//
+
+	//Origins
+	originmode = false
+	male = false // just change what people call you, no impact on story.
+	female = false // just change what people call you, no impact on story.
+	blankobg = false // blank easy mode, you have no weakness but no strength.
+	bountyhunterobg = false // you pay money for your faction, you have strength of prestart equipment and companions. but weakness of have to support them with credits.
+	mercenaryobg = false // You get stuff for your employer, you have strength of prestart base paid by your boss. but weakness of have to get stuff for your boss.
+	//
+
+//
+
+//"<b><br><br>Origin: I don't remember...</b> " + "<b><br><br>Origin: For the money!</b> " + "<b><br><br>Origin: My employer want me here. </b>"
+
+//$("<p>Hello</p>").insertBefore("#placeholder_choice")
+//$("<center><button id='command_button' size='50'>Origin: I don't remember...</button></center><br>").insertBefore("#placeholder_choice")
+//$("<center><button id='command_button' size='50'>Bye</button></center>").insertBefore("#placeholder_choice");
+
+$(document).ready(function() {
+
+	$("#command_line").fadeOut(0000);
+	$("#command_button_core").fadeIn(0000);
+
+    $('<p>Welcome to Text Text 7. At any time you may type "help" for a list of commands that you can use.</p>').insertBefore("#placeholder").fadeIn(0000);
+
+	$("<p>You woke up as alarm ranging at your ears. Groaning, you got up and look outside the viewport of your room. You look at a massive space station. Hello, welcome to the Star Nexus, that are orbiting the planet by the name of " + planetnamebold + ".</p> <p>Ahh, yes. I decide to come to this planet because it was recently discovered to have carcass of Illuminated Horror within the planet core. This give the planet the properities of magic, which make it valuable for bounty hunting for the elites. It a good place to go to for ___</p> <p>Please state your Origins for this game. Here your options. </p>").insertBefore("#placeholder").fadeIn(0000, function(){
+		originmode = true;
+	});
+
+	//Blank Origin
+	$("<center><button class='command_button' size='50' value='Blank'>Origin: I don't remember...</button></center><br>").insertBefore("#placeholder_choice");
+	//
+
+	//Bounty Hunter Origin
+	$("<center><button class='command_button' size='50' value='Bounty Hunter'>Origin: For the money!</button></center><br>").insertBefore("#placeholder_choice");
+	//
+
+	//Mercenary Origin
+	$("<center><button class='command_button' size='50' value='Mercenary'>Origin: My employer want me here.</button></center><br>").insertBefore("#placeholder_choice");
+	//
+
+	$(document).on("click", "#command_button_core", function() {
+		$("#command_button_core").fadeOut(0000);
+		$(".command_button").fadeIn(0000);
+	})
+
+	$(document).on("click", ".command_button", function() {
+
+		var button = $(".command_button").val();
+		
+			//Set Origin to Blank
+			if (button == "Blank") {
+				if (originmode == true && blankobg == false && bountyhunterobg == false && mercenaryobg == false) {
+					blankobg = true;
+					$("<p>I don't really remember why I am here, but I can tell that this is my chance for new life.</p>").insertBefore("#placeholder");
+					$(".command_button").fadeOut(0000);
+				}
+				else $("<p>Sorry, but you can't change your origin, now that have been set.</p>").insertBefore("#placeholder");
+			}
+			//
+
+			//set origin to bounty hunter
+			else if (button == "Bounty Hunter"){
+				if (originmode == true && blankobg == false && bountyhunterobg == false && mercenaryobg == false) {
+					bountyhunterobg = true;
+					$("<p>I came here with my gang to get rich!</p>").insertBefore("#placeholder");
+					$(".command_button").fadeOut(0000);
+				}
+				else $("<p>Sorry, but you can't change your origin, now that have been set.</p>").insertBefore("#placeholder");
+			}
+			//
+
+			//set origin to mercenary
+			else if (button == "Mercenary"){
+				if (originmode == true && blankobg == false && bountyhunterobg == false && mercenaryobg == false) {
+					mercenaryobg = true;
+					$("<p>My boss want me to stay here and find something fancy and valuable and deliver it to him.</p>").insertBefore("#placeholder");
+					$(".command_button").fadeOut(0000);
+				}
+				else $("<p>Sorry, but you can't change your origin, now that have been set.</p>").insertBefore("#placeholder");
+			}
+			//
+
+			//When your origins fail
+			else
+				$("<p>You got this as value: "+"<b>'"+button+"'</b>"+" - but something went wrong!"+"</p>").insertBefore("#placeholder");
+			//
+		
+
+		$("form").submit(function() {
+			var input = $("#command_line").val();
+			
+			$("#console").scrollTop($("#console")[0].scrollHeight);
+
+			$("#command_line").val("");
+		});
+	});
+});
+    </script>
+    <title>Text Test 7</title>
+</head>
+<body>
+
+    <div id="container"> <!--Group everything-->
+
+        <div id="console"> <!--All narrative elements here-->
+
+            <p id="story_inventory"></p>
+
+        </div>
+
+    <div id="placeholder"></div> <!--ALLOWS CONTENT TO BE INSERTED BEFORE THIS-->
+
+    
+
+    <form onsubmit="return false;"> <!--INPUT-->
+
+        <center><input type="text" id="command_line" size="50" autofocus="autofocus" autocomplete="off"></center>
+
+        <br>
+    </form>
+
+    <div id="placeholder_choice"></div> <!--Allows choice to be inserted before this-->
+
+    <center><button id="command_button_core" size="50">Next</button></center>
+
+</div>
+
+</body>
+</html>
