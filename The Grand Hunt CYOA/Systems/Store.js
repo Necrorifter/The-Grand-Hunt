@@ -4,514 +4,431 @@
 
 // $('<input type=\'text\' class=\'command_line lines\' size=\'50\' autofocus=\'autofocus\' autocomplete=\'off\'></input>').appendTo('#textbox').fadeIn(0);
 
-//$('<button class=\'command_button s-buttons\' value=\'pistol\'>Pistol</button> <br class=\'brs\'>').appendTo('#storebox');
+// $('<button class=\'command_button s-buttons\' value=\'pistol\'>Pistol</button> <br class=\'brs\'>').appendTo('#storebox');
 
-var pistol = "pistol";
-var amtOPistol = 0;
+const pistol = 'pistol'
+let amtOPistol = 0
 
-var rifle = "rifle";
-var amtORifle = 0;
+const rifle = 'rifle'
+let amtORifle = 0
 
-var sword = "sword";
-var amtOSword = 0;
+const sword = 'sword'
+let amtOSword = 0
 
-var test = "test";
-var amtOTest = 0;
+const test = 'test'
+let amtOTest = 0
 
-var point = 400;
+//let point = 400
 
-function store() {
+function store () {
+  clean()
+  equipmentWipe('wipe')
 
-    clean();
-    equipmentWipe("wipe");
+  $('#textbox').addClass('hidden')
+  $('#choicebox').removeClass('hidden')
+  $('#storebox').removeClass('hidden')
+  $('#inventory').removeClass('hidden')
+  $('#equipment').addClass('hidden')
 
-    $("#textbox").addClass("hidden");
-    $("#choicebox").removeClass("hidden");
-    $("#storebox").removeClass("hidden");
-    $("#inventory").removeClass("hidden");
-    $("#equipment").addClass("hidden");
+  if ($('#storebox').hasClass('hidden')) {
+    $('.MB-I').removeClass('hidden')
+  } else {
+    $('.MB-I').addClass('hidden')
+  }
 
-    if ($("#storebox").hasClass("hidden")) {
+  inventoryWipe()
+  lookInventory()
 
-        $(".MB-I").removeClass("hidden");
+  console.log(point)
+  CL()
 
-    }
+  CCPlayer('Credit')
 
-    else {
+  $('<p class=\'texts\'>Store</p>').appendTo('#storebox');
 
-        $(".MB-I").addClass("hidden");
+  $('<button class=\'store_button s-buttons\' value=\'pistol\'>Pistol | Cost: 100c</button>').appendTo('#storebox')
 
-    }
+  $('<button class=\'store_button s-buttons\' value=\'rifle\'>Rifle | Cost: 200c</button>').appendTo('#storebox')
 
-    inventoryWipe();
-    lookInventory();
+  $('<button class=\'store_button s-buttons\' value=\'sword\'>Sword | Cost: 50c</button>').appendTo('#storebox')
 
-    console.log(point);
-    CL();
+  $('<button class=\'store_button s-buttons\' value=\'test\'>Test | Cost: 500c</button>').appendTo('#storebox')
 
-    CCPlayer("Credit");
+  $('<button class=\'equipment_button s-buttons\' value=\'exitStore\'>Exit</button>').appendTo('#choicebox')
 
-    $('<button class=\'store_button s-buttons\' value=\'pistol\'>Pistol | Cost: 100c</button>').appendTo('#storebox');
-
-    $('<button class=\'store_button s-buttons\' value=\'rifle\'>Rifle | Cost: 200c</button>').appendTo('#storebox');
-
-    $('<button class=\'store_button s-buttons\' value=\'sword\'>Sword | Cost: 50c</button>').appendTo('#storebox');
-
-    $('<button class=\'store_button s-buttons\' value=\'test\'>Test | Cost: 500c</button>').appendTo('#storebox');
-
-    $('<button class=\'equipment_button s-buttons\' value=\'exitStore\'>Exit</button>').appendTo('#choicebox');
-
-    $('<button class=\'equipment_button e-buttons\' value=\'s-equipment\'>Equipment</button>').appendTo('#choicebox');
-
+  $('<button class=\'equipment_button e-buttons\' value=\'s-equipment\'>Equipment</button>').appendTo('#choicebox')
 };
 
-$(document).on('click', '.s-buttons', function() {
+$(document).on('click', '.s-buttons', function () {
+  const button = $(this).val()
+  console.log('The Button is ' + button)
+  CL()
+  $('#container').scrollTop($('#container')[0].scrollHeight)
 
-    var button = $(this).val();
-    console.log('The Button is ' + button);
-    CL();
-    $('#container').scrollTop($('#container')[0].scrollHeight);
+  if (button == 'exitStore') {
+    $('.MB-N').trigger('click')
+  }
 
-    if (button == 'exitStore') {
+  switch (button) {
+    case 'pistol': {
+      commandReset()
 
-        $('.MB-N').trigger("click");
+      selectInventory('reset')
 
+      selectedItem = 'pistol'
+
+      $('<button class=\'inventory_button c-buttons\' value=\'buyPistol\'>Buy</button>').appendTo('#choicebox')
+
+      $(this).addClass('selected')
+
+      console.log('select Pistol')
+      CL()
+
+      selectInventory('select')
+    } break
+
+    case 'rifle': {
+      commandReset()
+
+      selectInventory('reset')
+
+      selectedItem = 'rifle'
+
+      $('<button class=\'inventory_button c-buttons\' value=\'buyRifle\'>Buy</button>').appendTo('#choicebox')
+
+      $(this).addClass('selected')
+
+      console.log('select Rifle')
+      CL()
+
+      selectInventory('select')
+    } break
+
+    case 'sword': {
+      commandReset()
+
+      selectInventory('reset')
+
+      selectedItem = 'sword'
+
+      $('<button class=\'inventory_button c-buttons\' value=\'buySword\'>Buy</button>').appendTo('#choicebox')
+
+      $(this).addClass('selected')
+
+      console.log('select Sword')
+      CL()
+
+      selectInventory('select')
+    } break
+
+    case 'test': {
+      commandReset()
+
+      selectInventory('reset')
+
+      selectedItem = 'test'
+
+      $('<button class=\'inventory_button c-buttons\' value=\'buyTest\'>Buy</button>').appendTo('#choicebox')
+
+      $(this).addClass('selected')
+
+      console.log('select Test')
+      CL()
+
+      selectInventory('select')
     }
+  }
+})
 
-    switch (button) {
+$(document).on('click', '.c-buttons', function () {
+  const button = $(this).val()
+  console.log('The Button is ' + button)
+  CL()
+  $('#container').scrollTop($('#container')[0].scrollHeight)
 
-        case 'pistol': {
+  lookInventory()
 
-            commandReset();
-            
-            selectInventory("reset");
+  switch (button) {
+    case 'buyPistol': {
+      point = point - 100
 
-            selectedItem = "pistol";
-            
-            $('<button class=\'inventory_button c-buttons\' value=\'buyPistol\'>Buy</button>').appendTo('#choicebox');
-            
-            $(this).addClass("selected");
+      selectInventory('reset')
 
-            console.log("select Pistol");
-            CL();
+      if (point >= 0) {
+        console.log('Your equipment menu is working. ' + button)
 
-            selectInventory("select");
+        console.log('the point remaining is ' + point + '.')
+        CL()
 
-        } break;
-
-        case 'rifle': {
-
-            commandReset();
-            
-            selectInventory("reset");
-
-            selectedItem = "rifle";
-            
-            $('<button class=\'inventory_button c-buttons\' value=\'buyRifle\'>Buy</button>').appendTo('#choicebox');
-            
-            $(this).addClass("selected");
-
-            console.log("select Rifle");
-            CL();
-
-            selectInventory("select");
-
-        } break;
-
-        case 'sword': {
-
-            commandReset();
-            
-            selectInventory("reset");
-
-            selectedItem = "sword";
-            
-            $('<button class=\'inventory_button c-buttons\' value=\'buySword\'>Buy</button>').appendTo('#choicebox');
-            
-            $(this).addClass("selected");
-
-            console.log("select Sword");
-            CL();
-
-            selectInventory("select");
-
-        } break;
-
-        case 'test': {
-
-            commandReset();
-            
-            selectInventory("reset");
-
-            selectedItem = "test";
-            
-            $('<button class=\'inventory_button c-buttons\' value=\'buyTest\'>Buy</button>').appendTo('#choicebox');
-            
-            $(this).addClass("selected");
-
-            console.log("select Test");
-            CL();
-
-            selectInventory("select");
-
-        }
-
-    }
-
-});
-
-$(document).on('click', '.c-buttons', function() {
-
-    var button = $(this).val();
-    console.log('The Button is ' + button);
-    CL();
-    $('#container').scrollTop($('#container')[0].scrollHeight);
-
-    lookInventory();
-
-    switch (button) {
-
-        case "buyPistol": {
-
-            point = point - 100;
-
-            selectInventory("reset");
-
-            if (point >= 0) {
-
-                console.log("Your equipment menu is working. " + button);
-
-                console.log("the point remaining is " + point + ".");
-                CL();
-
-                /*if (amtOPistol >= 3) {
+        /* if (amtOPistol >= 3) {
 
                     console.log("Is this working?");
                     CL();
-        
+
                     alert("Sorry, you cannot buy more of this type.");
 
                     point = point + 100;
 
                     return false;
-        
-                };*/
 
-                amtOPistol++;
+                }; */
 
-                inventory.push("Pistol");
+        amtOPistol++
 
-                console.log("You push pistol into array " + inventory);
+        inventory.push('Pistol')
 
-                console.log("amount of pistol owned is " + amtOPistol);
-                CL();
+        console.log('You push pistol into array ' + inventory)
 
-                lookInventory();
+        console.log('amount of pistol owned is ' + amtOPistol)
+        CL()
 
-                CCPlayer("Credit");
+        lookInventory()
 
-            }
+        CCPlayer('Credit')
+      } else if (point <= 0) {
+        // alert("Sorry, you do not have enough point left for " + button + ", please either continue to next step or remove other choices.");
+        point = point + 100
+        CCPlayer('Credit')
+        selectInventory('fail')
+      }
+    } break
 
-            else if (point <= 0) {
+    case 'sellPistol': {
+      function sellPistol (inventory, value) {
+        const index = inventory.indexOf(value)
+        if (index > -1) {
+          inventory.splice(index, 1)
+        }
+        return inventory
+      }
 
-                //alert("Sorry, you do not have enough point left for " + button + ", please either continue to next step or remove other choices.");
-                point = point + 100;
-                CCPlayer('Credit');
-                selectInventory("fail");
+      sellPistol(inventory, 'Pistol')
 
-            }
+      amtOPistol--
 
-        } break;
+      lookInventory()
 
-        case 'sellPistol': {
+      point = point + 100
 
-            function sellPistol(inventory, value) {
+      CCPlayer('Credit')
 
-                var index = inventory.indexOf(value);
-                if (index > -1) {
-                    inventory.splice(index, 1);
-                }
-                return inventory;
-            }
-            
-            sellPistol(inventory, 'Pistol');
-            
-            amtOPistol--;
+      if (amtOPistol == 0) {
+        commandReset()
+        selectInventory('reset')
+        $('.Pistol').remove()
+        console.log('no more gun')
+        CL()
+      }
+    } break
 
-            lookInventory();
+    case 'buyRifle': {
+      point = point - 200
 
-            point = point + 100;
+      selectInventory('reset')
 
-            CCPlayer("Credit");
+      if (point >= 0) {
+        console.log('Your equipment menu is working. ' + button)
 
-            if (amtOPistol == 0) {
-            
-                commandReset();
-                selectInventory("reset");
-                $('.Pistol').remove();
-                console.log("no more gun");
-                CL();
-            
-            }
+        console.log('the point remaining is ' + point + '.')
+        CL()
 
-        } break;
+        if (amtORifle >= 3) {
+          console.log('Is this working?')
+          CL()
 
-        case "buyRifle": {
+          alert('Sorry, you cannot buy more of this type.')
 
-            point = point - 200;
+          point = point + 200
 
-            selectInventory("reset");
+          return false
+        };
 
-            if (point >= 0) {
+        amtORifle++
 
-                console.log("Your equipment menu is working. " + button);
+        inventory.push('Rifle')
 
-                console.log("the point remaining is " + point + ".");
-                CL();
+        console.log('You push rifle into array ' + inventory)
 
-                if (amtORifle >= 3) {
+        console.log('amount of rifle owned is ' + amtORifle)
+        CL()
 
-                    console.log("Is this working?");
-                    CL();
-        
-                    alert("Sorry, you cannot buy more of this type.");
+        lookInventory()
 
-                    point = point + 200;
+        CCPlayer('Credit')
+      } else if (point <= 0) {
+        // alert("Sorry, you do not have enough point left for " + button + ", please either continue to next step or remove other choices.");
+        point = point + 200
+        CCPlayer('Credit')
+        selectInventory('fail')
+      }
+    } break
 
-                    return false;
-        
-                };
+    case 'sellRifle' && amtORifle > 0: {
+      function sellRifle (inventory, value) {
+        const index = inventory.indexOf(value)
+        if (index > -1) {
+          inventory.splice(index, 1)
+        }
+        return inventory
+      }
 
-                amtORifle++;
+      sellRifle(inventory, 'Rifle')
 
-                inventory.push("Rifle");
+      amtORifle--
 
-                console.log("You push rifle into array " + inventory);
+      lookInventory()
 
-                console.log("amount of rifle owned is " + amtORifle);
-                CL();
+      point = point + 200
 
-                lookInventory();
+      CCPlayer('Credit')
 
-                CCPlayer("Credit");
+      if (amtORifle == 0) {
+        commandReset()
+        selectInventory('reset')
+        $('.Rifle').remove()
+        console.log('no more gun')
+        CL()
+      }
+    } break
 
-            }
+    case 'buySword': {
+      point = point - 50
 
-            else if (point <= 0) {
+      selectInventory('reset')
 
-                //alert("Sorry, you do not have enough point left for " + button + ", please either continue to next step or remove other choices.");
-                point = point + 200;
-                CCPlayer('Credit');
-                selectInventory("fail");
+      if (point >= 0) {
+        console.log('Your equipment menu is working. ' + button)
 
+        console.log('the point remaining is ' + point + '.')
+        CL()
 
-            }
+        if (amtOSword >= 3) {
+          console.log('Is this working?')
+          CL()
 
-        } break;
+          alert('Sorry, you cannot buy more of this type.')
 
-        case 'sellRifle' && amtORifle > 0: {
+          point = point + 50
 
-            function sellRifle(inventory, value) {
+          return false
+        };
 
-                var index = inventory.indexOf(value);
-                if (index > -1) {
-                    inventory.splice(index, 1);
-                }
-                return inventory;
-            }
-            
-            sellRifle(inventory, 'Rifle');   
-            
-            amtORifle--;
+        amtOSword++
 
-            lookInventory();
+        inventory.push('Sword')
 
-            point = point + 200;
+        console.log('You push sword into array ' + inventory)
 
-            CCPlayer("Credit");
+        console.log('amount of sword owned is ' + amtOSword)
+        CL()
 
-            if (amtORifle == 0) {
-            
-                commandReset();
-                selectInventory("reset");
-                $('.Rifle').remove();
-                console.log("no more gun");
-                CL();
-            
-            }
+        lookInventory()
 
-        } break;
+        CCPlayer('Credit')
+      } else if (point <= 0) {
+        // alert("Sorry, you do not have enough point left for " + button + ", please either continue to next step or remove other choices.");
+        point = point + 50
+        CCPlayer('Credit')
+        selectInventory('fail')
+      }
+    } break
 
-        case "buySword": {
+    case 'sellSword' && amtOSword > 0: {
+      function sellSword (inventory, value) {
+        const index = inventory.indexOf(value)
+        if (index > -1) {
+          inventory.splice(index, 1)
+        }
+        return inventory
+      }
 
-            point = point - 50;
+      sellSword(inventory, 'Sword')
 
-            selectInventory("reset");
+      amtOSword--
 
-            if (point >= 0) {
+      lookInventory()
 
-                console.log("Your equipment menu is working. " + button);
+      point = point + 50
 
-                console.log("the point remaining is " + point + ".");
-                CL();
+      CCPlayer('Credit')
 
-                if (amtOSword >= 3) {
+      if (amtOSword == 0) {
+        commandReset()
+        selectInventory('reset')
+        $('.Sword').remove()
+        console.log('no more melee')
+        CL()
+      }
+    } break
 
-                    console.log("Is this working?");
-                    CL();
-        
-                    alert("Sorry, you cannot buy more of this type.");
+    case 'buyTest': {
+      point = point - 500
 
-                    point = point + 50;
+      selectInventory('reset')
 
-                    return false;
-        
-                };
+      if (point >= 0) {
+        console.log('Your equipment menu is working. ' + button)
 
-                amtOSword++;
+        console.log('the point remaining is ' + point + '.')
+        CL()
 
-                inventory.push("Sword");
+        if (amtOTest >= 1) {
+          console.log('Is this working?')
+          CL()
 
-                console.log("You push sword into array " + inventory);
+          alert('Sorry, you cannot buy more of this type.')
 
-                console.log("amount of sword owned is " + amtOSword);
-                CL();
+          point = point + 500
 
-                lookInventory();
+          return false
+        };
 
-                CCPlayer("Credit");
+        amtOTest++
 
-            }
+        inventory.push('Test')
 
-            else if (point <= 0) {
+        console.log('You push test into array ' + inventory)
 
-                //alert("Sorry, you do not have enough point left for " + button + ", please either continue to next step or remove other choices.");
-                point = point + 50;
-                CCPlayer('Credit');
-                selectInventory("fail");
+        console.log('amount of test owned is ' + amtOTest)
+        CL()
 
-            }
+        lookInventory()
 
-        } break;
+        CCPlayer('Credit')
+      } else if (point <= 0) {
+        // alert("Sorry, you do not have enough point left for " + button + ", please either continue to next step or remove other choices.");
+        point = point + 500
+        CCPlayer('Credit')
+        selectInventory('fail')
+      }
+    } break
 
-        case 'sellSword' && amtOSword > 0: {
+    case 'sellTest' && amtOTest > 0: {
+      function sellTest (inventory, value) {
+        const index = inventory.indexOf(value)
+        if (index > -1) {
+          inventory.splice(index, 1)
+        }
+        return inventory
+      }
 
-            function sellSword(inventory, value) {
+      sellTest(inventory, 'Test')
 
-                var index = inventory.indexOf(value);
-                if (index > -1) {
-                    inventory.splice(index, 1);
-                }
-                return inventory;
-            }
-            
-            sellSword(inventory, 'Sword');  
-            
-            amtOSword--;
+      amtOTest--
 
-            lookInventory();
+      lookInventory()
 
-            point = point + 50;
+      point = point + 500
 
-            CCPlayer("Credit");
+      CCPlayer('Credit')
 
-            if (amtOSword == 0) {
-            
-                commandReset();
-                selectInventory("reset");
-                $('.Sword').remove();
-                console.log("no more melee");
-                CL();
-            
-            }
-
-        } break;
-
-        case "buyTest": {
-
-            point = point - 500;
-
-            selectInventory("reset");
-
-            if (point >= 0) {
-
-                console.log("Your equipment menu is working. " + button);
-
-                console.log("the point remaining is " + point + ".");
-                CL();
-
-                if (amtOTest >= 1) {
-
-                    console.log("Is this working?");
-                    CL();
-        
-                    alert("Sorry, you cannot buy more of this type.");
-
-                    point = point + 500;
-
-                    return false;
-        
-                };
-
-                amtOTest++;
-
-                inventory.push("Test");
-
-                console.log("You push test into array " + inventory);
-
-                console.log("amount of test owned is " + amtOTest);
-                CL();
-
-                lookInventory();
-
-                CCPlayer("Credit");
-
-            }
-
-            else if (point <= 0) {
-
-                //alert("Sorry, you do not have enough point left for " + button + ", please either continue to next step or remove other choices.");
-                point = point + 500;
-                CCPlayer('Credit');
-                selectInventory("fail");
-
-            }
-
-        } break;
-
-        case 'sellTest' && amtOTest > 0: {
-
-            function sellTest(inventory, value) {
-
-                var index = inventory.indexOf(value);
-                if (index > -1) {
-                    inventory.splice(index, 1);
-                }
-                return inventory;
-            }
-            
-            sellTest(inventory, 'Test');
-            
-            amtOTest--;
-
-            lookInventory();
-
-            point = point + 500;
-
-            CCPlayer("Credit");
-
-            if (amtOTest == 0) {
-            
-                commandReset();
-                selectInventory("reset");
-                $('.Test').remove();
-                console.log("no more test");
-                CL();
-            
-            }
-
-        } break;
-
-    }
-
-});
+      if (amtOTest == 0) {
+        commandReset()
+        selectInventory('reset')
+        $('.Test').remove()
+        console.log('no more test')
+        CL()
+      }
+    } break
+  }
+})

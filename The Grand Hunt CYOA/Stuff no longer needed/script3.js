@@ -1,36 +1,36 @@
-$(document).ready(function() {
-    // Create jQuery handle to all situations.
-    // Having this outside click handler allows you to access it while
-    // preventing you from having to query the DOM every time you want to
-    // act on this selection of elements as a whole.
-    var $allSituations = $('.situation');
+$(document).ready(function () {
+  // Create jQuery handle to all situations.
+  // Having this outside click handler allows you to access it while
+  // preventing you from having to query the DOM every time you want to
+  // act on this selection of elements as a whole.
+  const $allSituations = $('.situation')
 
-    // Get selector for default situation(s) which will show on page load
-    var $defaultSituation = $('.default_situation');
+  // Get selector for default situation(s) which will show on page load
+  const $defaultSituation = $('.default_situation')
 
-    // Show default situation(s)
-    $allSituations.hide();
-    $defaultSituation.fadeIn(2000);
+  // Show default situation(s)
+  $allSituations.hide()
+  $defaultSituation.fadeIn(2000)
 
-    $('.situation_choice').on('click', function() {
-        // Find target situation element for this choice.
-        // We use the 'situation-target' data attribute for the
-        // clicked element, this, within the handler to determine
-        // the target.
-        var targetName = $(this).data('situation-target');
-        var $target = $('.situation[data-situation="' + targetName + '"]')
+  $('.situation_choice').on('click', function () {
+    // Find target situation element for this choice.
+    // We use the 'situation-target' data attribute for the
+    // clicked element, this, within the handler to determine
+    // the target.
+    const targetName = $(this).data('situation-target')
+    const $target = $('.situation[data-situation="' + targetName + '"]')
 
-        // if we find a single target element, we can now show it
-        if($target.length === 1) {
-            // hide all situations
-            $allSituations.hide();
-            // show target element
-            $target.fadeIn(4000);
-        }
-    });
-});
+    // if we find a single target element, we can now show it
+    if ($target.length === 1) {
+      // hide all situations
+      $allSituations.hide()
+      // show target element
+      $target.fadeIn(4000)
+    }
+  })
+})
 
-/*<div class="situation default_situation" data-situation="start">
+/* <div class="situation default_situation" data-situation="start">
 
                 <div class="situation_text">
                     You are lost in the woods.
@@ -43,7 +43,7 @@ $(document).ready(function() {
 
             <div class="situation" data-situation="found_cave">
                 <div class="situation_text">
-                    You find a cave. Do you go inside or go look for food? 
+                    You find a cave. Do you go inside or go look for food?
                 </div>
 
                 <input type="button" class="situation_choice"
@@ -64,7 +64,7 @@ $(document).ready(function() {
 
             <div class="situation" data-situation="food_search">
                 <div class="situation_text">
-                    You walk away from the cave, to search for food. You find berries. Do you eat them or not? 
+                    You walk away from the cave, to search for food. You find berries. Do you eat them or not?
                 </div>
 
                 <input type="button" class="situation_choice"
@@ -88,4 +88,4 @@ $(document).ready(function() {
                     You ignore the berries. You are still hungry.
                 </div>
 
-            </div>*/
+            </div> */

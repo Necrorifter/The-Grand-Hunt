@@ -6,6 +6,18 @@ overflow: auto;
 text-align: center;
 }
 
+.red {
+color: red;
+}
+
+.blue {
+color: blue;
+}
+
+.yellow {
+color: yellow;
+}
+
 html {
 overflow: hidden;
 }
@@ -29,7 +41,7 @@ border-bottom: 1px solid darkgreen;
 position: absolute;
 width: 200px;
 left: 1068px;
-height: 205px;
+height: 200px;
 top:50px;
 padding: 5px;
 border-bottom: 1px solid darkgreen;
@@ -71,6 +83,10 @@ left: 856px;
 height: 170px;
 padding: 10px;
 top: 700px;
+}
+
+#BG_movement {
+visibility: hidden;
 }
 
 #choicebox {
@@ -148,7 +164,11 @@ color: green;
 display: none;
 }
 
-.center {
+.centers {
+text-align: center;
+}
+
+.centers_M {
 text-align: center;
 }
 
@@ -184,6 +204,10 @@ margin: 0px;
 margin-bottom: 1em;
 padding: 5px;
 text-align: center;
+}
+
+.eStat {
+color: green;
 }
 
 /*#map { // Just a useless map option, use the #game in this place.
